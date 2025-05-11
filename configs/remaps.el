@@ -1,24 +1,21 @@
-;;set the capslock-f key to toggel cmd and insert mode
-;;(global-set-key (kbd "C-f") 'xah-fly-mode-toggle)
+(global-unset-key (kbd "C-s")) ;; I need C-s for my selection functions
+(global-unset-key (kbd "C-d")) ;; delete-char is useless
 
-;;control movement keys act like normal movement
-(keyboard-translate ?\C-i ?\C-p)
+(defun set-keys-on-map (map &rest remaps)
+  "Convenience function to set multiple keymaps."
+  (let ((key (pop remaps))
+       (fun (pop remaps)))
+    (keymap-set map key fun)
+    (when remaps (apply 'set-keys-on-map map remaps))))
 
-;;the general package is like use-package but for keybindings
-(use-package general)
+(global-set-key (kbd "C-c C-b") 'buffer-menu)
 
-(general-unbind
-  "C-d" ;;to serve as prefix for delete commands
-  "C-s" ;;prefix for select statements
-  )
+(set-keys-on-map mode-specific-map "C-c C-b" 'buffer-menu)
 
-;;This big key map is movement keys I want in all buffers
-;; but it works well with godmode
-(general-define-key
- :keymaps 'override
+(set-keys-on-map (current-global-map)
  "C-f" 'god-mode-all
- "C-p" 'previous-line
  "C-k" 'next-line
+ "C-p" 'previous-line
  "C-j" 'left-char
  "C-l" 'right-char
  "C-o" 'forward-word
@@ -38,45 +35,21 @@
  "M-%" 'vr/replace
  "C-M-%" 'vr/query-replace
  "C-c C-c" 'recompile
+ "C-c b" 'buffer-menu
+ "C-d C-b" 'kill-current-buffer
  )
-
-;;these are placed seperately since C-c
-;;is for user defined functions
-(general-define-key
- :prefix "C-c"
- :keymaps 'override
- "C-t" 'open-terminal-in-workdir
- "C-b" 'buffer-menu)
-
-;;my delete keybinds
-(general-define-key
- :prefix "C-d"
- :keymaps 'override
- "C-l" 'kill-whole-line
- "C-w" 'kill-word
- "C-c" 'kill-comment
- "C-s" 'kill-sentence
- "C-p" 'kill-paragraph
- "C-b" 'kill-current-buffer
- "C-r" 'kill-region
- "C-d" 'delete-char)
 
 (defalias 'select-line
    (kmacro "C-: C-s C-s C-;"))
 
-;;my selection fucntions
-(general-define-key
- :prefix "C-s"
- :keymaps 'override
- "C-s" 'set-mark-command
- "C-w" 'mark-word
- "C-b" 'mark-whole-buffer
- "C-p" 'mark-page
- "C-l" 'select-line) ;; our select line function
+;;selection fucntions
+(set-keys-on-map (current-global-map)
+ "C-s C-s" 'set-mark-command
+ "C-s C-w" 'mark-word
+ "C-s C-b" 'mark-whole-buffer
+ "C-s C-p" 'mark-page
+ "C-s C-l" 'select-line) ;; our select line function
 
-;;following is needed to make god mode play nice with i
-;;also can place god mode specific keymaps here
-(general-define-key
- :keymaps 'god-local-mode-map
- "i" 'previous-line)
+;; only remap i in god-mode locally
+(keymap-set god-local-mode-map "i" 'previous-line)
 

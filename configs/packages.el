@@ -1,41 +1,40 @@
 ;;TODO make all my modes eglot centric
 ;;the search and replace you deserve
+
+;;; Code:
+;;set <pkg>-path variables for use in use-package load-path expressions
+(cl-loop for file in (directory-files (concat user-emacs-directory "lisp/"))
+	 for package = (file-name-sans-extension file)
+	 unless (string-prefix-p "." file)
+	 do (set
+	     (intern (concat package "-path"))
+	     (concat user-emacs-directory "lisp/" file)))
+
 (use-package visual-regexp
+  :load-path visual-regexp-path
   :ensure t)
 
 ;; Enable vertico
 (use-package vertico
-  :init
+  :load-path vertico-path
+  :config
   (vertico-mode)
-  ;; vertico cycling
   (setq vertico-cycle t))
 
-;; Persist history over Emacs restarts. Vertico sorts by history position.
-(use-package savehist
-  :init
-  (savehist-mode))
-
 ;;yasnippet
-(add-to-list 'load-path
-              "~/.emacs.d/plugins/yasnippet")
 (use-package yasnippet
+  :load-path yasnippet-path
   :config (yas-global-mode 1))
-
-;;Highlight matching paren
-(use-package paren
-  :ensure nil
-  :init
-  (setq show-paren-delay 0)
-  :config
-  (show-paren-mode +1))
 
 ;;syntax checker
 (use-package flycheck
+  :load-path flycheck-path
   :ensure t
   :config (global-flycheck-mode))
 
 ;;god-mode
 (use-package god-mode
+  :load-path god-mode-path
   :config
   (god-mode)
   (setq god-exempt-major-modes nil)
@@ -45,20 +44,8 @@
   (add-hook 'post-command-hook #'my-god-mode-update-cursor-type)
   (god-mode))
 
-;;shows minibuffer with all available key combinations
-(use-package which-key
-  :config (which-key-mode))
-
-;;just the color theme
-(use-package gruvbox-theme
-  :config (load-theme 'gruvbox-dark-hard))
-
-;;dirvish, basically dired++
-(use-package dirvish
-  :config
-  (dirvish-override-dired-mode))
-
 (use-package company
+  :load-path company-mode-path
   :ensure t
   :defer t
   :config
@@ -80,14 +67,18 @@
   )
 
 ;;eglot bro it's eglot
+;;eglot is built in 
 (use-package eglot
   :ensure t
   :defer t
   :config
-  (add-to-list 'eglot-server-programs
-	       '(svelte-mode . ("svelteserver" "--stdio"))))
+  )
 
 ;;git for a /g/entleman
 (use-package magit
+  :load-path magit-path
   :ensure t)
+
+(use-package go-mode
+  :load-path go-mode-path)
 

@@ -5,15 +5,8 @@
 ;;enable indentation in org mode automatically
 (add-hook 'org-mode-hook 'org-indent-mode)
 
-;; enable php mode
-(when (file-directory-p "~/.emacs.d/configs/")
-  (load "~/.emacs.d/configs/php-mode-autoloads.el"))
-
 ;; set backup directory such that backup files (...~) don't pile everywhere
 (setq backup-directory-alist '(("." . "~/.file_backups")))
-
-;;telling sly where to find the sbcl compiler
-(setq inferior-lisp-program "/usr/bin/sbcl")
 
 ;;this mode automatically updates files that have changed on the disk
 (global-auto-revert-mode 1)
@@ -31,7 +24,7 @@
 ;;enable line numbers
 (global-display-line-numbers-mode)
 
-;;enable web-mode on .asp files
+;;use web-mode on .asp files
 (add-to-list 'auto-mode-alist '("\\.asp\\'" . web-mode))
 
 ;;disable sound
@@ -39,3 +32,20 @@
 
 ;;don't tell me about style errors in my packages
 (setq warning-minimum-level :warning)
+
+;; keep a history of commands which vertico can use
+(savehist-mode)
+
+;; highlight matching parentheses
+(setq show-paren-delay 0)
+(show-paren-mode +1)
+
+;; which key shows possible options as you type in minibuffer
+;; this will only work for emacs v 30+
+(which-key-mode)
+
+;;the tao theme
+(add-to-list 'load-path (concat user-emacs-directory "lisp/tao-theme"))
+(add-to-list 'custom-theme-load-path
+	     (concat user-emacs-directory "lisp/tao-theme"))
+(load-theme 'tao-yang)
