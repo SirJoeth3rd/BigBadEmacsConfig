@@ -79,6 +79,15 @@
   :load-path magit-path
   :ensure t)
 
+
+;;following two modes are mainly for the workflow project
 (use-package go-mode
   :load-path go-mode-path)
+
+(use-package elm-mode
+  :load-path elm-mode-path)
+
+(provide 'packages)
+;;;packages.el ends here
+
 

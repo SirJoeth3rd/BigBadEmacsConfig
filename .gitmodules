@@ -34,3 +34,6 @@
 [submodule "lisp/go-mode"]
 	path = lisp/go-mode
 	url = https://github.com/dominikh/go-mode.el.git
+[submodule "lisp/elm-mode"]
+	path = lisp/elm-mode
+	url = https://github.com/jcollard/elm-mode.git
