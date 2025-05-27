@@ -106,7 +106,6 @@
 
 ;; load individual files
 (load "packages")   ;;load in packages, if too bg it gets its own file
-(load "misc")       ;;misc for temporary testing
 (load "functions")  ;;all custom functions
 (load "settings")   ;;all settings
 (load "remaps")     ;;key remaps (loaded last with reason)

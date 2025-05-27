@@ -1,7 +1,8 @@
-;;TODO make all my modes eglot centric
-;;the search and replace you deserve
-
+;;; package --- All my packages and some configs
+;;; Commentary:
+;;  All lisp/ directory contains all the git submodules of all the packages
 ;;; Code:
+
 ;;set <pkg>-path variables for use in use-package load-path expressions
 (cl-loop for file in (directory-files (concat user-emacs-directory "lisp/"))
 	 for package = (file-name-sans-extension file)
@@ -10,6 +11,7 @@
 	     (intern (concat package "-path"))
 	     (concat user-emacs-directory "lisp/" file)))
 
+;; the search and replace you deserve
 (use-package visual-regexp
   :load-path visual-regexp-path
   :ensure t)
@@ -67,11 +69,10 @@
   )
 
 ;;eglot bro it's eglot
-;;eglot is built in 
+;;eglot is built in
 (use-package eglot
   :ensure t
   :defer t
-  :config
   )
 
 ;;git for a /g/entleman
@@ -87,7 +88,15 @@
 (use-package elm-mode
   :load-path elm-mode-path)
 
+;;dape is the emacs interface to the debug adapter protocol
+(use-package dape
+  :load-path dape-path
+  :config
+  ;; pulse source line
+  (add-hook 'dape-display-source-hook 'pulse-momentary-highlight-one-line)
+  
+  ;; remove some annoying info from startup
+  (remove-hook 'dape-start-hook 'dape-repl))
+
 (provide 'packages)
-;;;packages.el ends here
-
-
+;;; packages.el ends here

@@ -1,6 +1,9 @@
 (global-unset-key (kbd "C-s")) ;; I need C-s for my selection functions
 (global-unset-key (kbd "C-d")) ;; delete-char is useless
 
+;; make tab key do indent first then completion.
+(setq tab-always-indent 'complete)
+
 (defun set-keys-on-map (map &rest remaps)
   "Convenience function to set multiple keymaps."
   (let ((key (pop remaps))
@@ -13,9 +16,9 @@
 (set-keys-on-map mode-specific-map "C-c C-b" 'buffer-menu)
 
 (set-keys-on-map (current-global-map)
+ "C-i" 'previous-line
  "C-f" 'god-mode-all
  "C-k" 'next-line
- "C-p" 'previous-line
  "C-j" 'left-char
  "C-l" 'right-char
  "C-o" 'forward-word
@@ -37,10 +40,14 @@
  "C-c C-c" 'recompile
  "C-c b" 'buffer-menu
  "C-d C-b" 'kill-current-buffer
+ "C-c e" 'replace-elisp-with-result
  )
 
+;;why did this get reset somewhere?
+(global-set-key "\t" 'indent-for-tab-command)
+
 (defalias 'select-line
-   (kmacro "C-: C-s C-s C-;"))
+  (kmacro "C-: C-s C-s C-;"))
 
 ;;selection fucntions
 (set-keys-on-map (current-global-map)
@@ -50,6 +57,10 @@
  "C-s C-p" 'mark-page
  "C-s C-l" 'select-line) ;; our select line function
 
-;; only remap i in god-mode locally
+;; only remap i in god-mode locally,
+;; also my previous-line cmd being at the bottom of this file
+;; means I'll very quickly realise if there where any errors in
+;; configs until this point.
+
 (keymap-set god-local-mode-map "i" 'previous-line)
 

@@ -37,3 +37,6 @@
 [submodule "lisp/elm-mode"]
 	path = lisp/elm-mode
 	url = https://github.com/jcollard/elm-mode.git
+[submodule "lisp/dape"]
+	path = lisp/dape
+	url = https://github.com/svaante/dape.git

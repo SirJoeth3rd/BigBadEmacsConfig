@@ -1,6 +1,7 @@
 ;;disable menu bar and tool bar
 (tool-bar-mode -1)
 (menu-bar-mode -1)
+(scroll-bar-mode -1)
 
 ;;enable indentation in org mode automatically
 (add-hook 'org-mode-hook 'org-indent-mode)
@@ -43,9 +44,22 @@
 ;; which key shows possible options as you type in minibuffer
 ;; this will only work for emacs v 30+
 (which-key-mode)
+(which-key-setup-side-window-right-bottom) ;;Elisp isn't japanese
+(setq which-key-idle-delay 0.5)
+
+;;TODO: do some work to integrate which-key with god-mode
 
 ;;the tao theme
 (add-to-list 'load-path (concat user-emacs-directory "lisp/tao-theme"))
 (add-to-list 'custom-theme-load-path
 	     (concat user-emacs-directory "lisp/tao-theme"))
-(load-theme 'tao-yang)
+(load-theme 'tao-yin)
+
+;;; following is to detect .bashrc in emacs, very usefull for
+;;; inferior lisp processes. 
+(setq shell-command-switch "-ic")
+
+;; SLIME!
+(load (expand-file-name "~/.quicklisp/slime-helper.el"))
+(setq inferior-lisp-program "/bin/sbcl")
+

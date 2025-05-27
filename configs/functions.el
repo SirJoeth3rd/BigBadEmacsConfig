@@ -184,3 +184,13 @@ Version 2019-12-26"
       (re-search-forward "\n[ \t]*\n" nil "move"))))
 
 
+(defun replace-elisp-with-result ()
+  "Replace the preceding Elisp expression with its evaluated result."
+  (interactive)
+  (let ((value (eval (elisp--preceding-sexp)))
+        (start (save-excursion (backward-sexp) (point))))
+    (delete-region start (point))
+    (insert (format "%S" value))))
+
+(provide 'functions)
+;;; functions.el ends here
