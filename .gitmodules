@@ -40,3 +40,6 @@
 [submodule "lisp/dape"]
 	path = lisp/dape
 	url = https://github.com/svaante/dape.git
+[submodule "lisp/tuareg"]
+	path = lisp/tuareg
+	url = https://github.com/ocaml/tuareg.git

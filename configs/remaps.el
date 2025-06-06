@@ -49,13 +49,17 @@
 (defalias 'select-line
   (kmacro "C-: C-s C-s C-;"))
 
+(defalias 'kill-line-custom
+  (kmacro "C-s C-l <DEL> <DEL>"))
+
 ;;selection fucntions
 (set-keys-on-map (current-global-map)
  "C-s C-s" 'set-mark-command
  "C-s C-w" 'mark-word
  "C-s C-b" 'mark-whole-buffer
  "C-s C-p" 'mark-page
- "C-s C-l" 'select-line) ;; our select line function
+ "C-s C-l" 'select-line ;; our select line function
+ "C-d C-d" 'kill-line-custom)
 
 ;; only remap i in god-mode locally,
 ;; also my previous-line cmd being at the bottom of this file
@@ -63,4 +67,11 @@
 ;; configs until this point.
 
 (keymap-set god-local-mode-map "i" 'previous-line)
+
+;;unloading keys in specific mode maps
+(keymap-set verilog-mode-map "C-;" 'end-of-line)
+
+(provide 'remaps)
+;;; remaps.el ends here
+
 

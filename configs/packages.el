@@ -86,7 +86,13 @@
   :load-path go-mode-path)
 
 (use-package elm-mode
-  :load-path elm-mode-path)
+  :load-path elm-mode-path
+  :config
+  (setq-local outline-regexp "--[-^L]*"))
+
+;;tuareg is for ocaml development
+(use-package tuareg
+  :load-path tuareg-path)
 
 ;;dape is the emacs interface to the debug adapter protocol
 (use-package dape
@@ -97,6 +103,12 @@
   
   ;; remove some annoying info from startup
   (remove-hook 'dape-start-hook 'dape-repl))
+
+;; emacs built in folding
+;; TODO: check out integration with imenu
+(use-package outline
+  :config
+  (setq outline-minor-mode-cycle t))
 
 (provide 'packages)
 ;;; packages.el ends here
