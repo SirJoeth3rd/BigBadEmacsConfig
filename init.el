@@ -85,14 +85,7 @@
      "3e374bb5eb46eb59dbd92578cae54b16de138bc2e8a31a2451bf6fdb0f3fd81b"
      "72ed8b6bffe0bfa8d097810649fd57d2b598deef47c992920aef8b5d9599eefe"
      default))
- '(package-selected-packages
-   '(cider company dirvish eglot elm-mode elpy esup flycheck
-	   flycheck-clang-analyzer general go-mode gruvbox-theme
-	   hy-Mode hy-mode js2-mode lsp-mode magit php-mode quelpa
-	   quelpa-use-package request sly spice-mode svelte-mode tide
-	   tree-sitter tree-sitter-langs treesit tuareg
-	   typescript-mode use-package vertico-posframe visual-regexp
-	   web-mode which-key yasnippet yasnippet-snippets))
+ '(package-selected-packages nil)
  '(safe-local-variable-values '((git-commit-major-mode . git-commit-elisp-text-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

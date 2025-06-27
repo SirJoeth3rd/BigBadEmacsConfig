@@ -43,3 +43,6 @@
 [submodule "lisp/tuareg"]
 	path = lisp/tuareg
 	url = https://github.com/ocaml/tuareg.git
+[submodule "lisp/org-modern"]
+	path = lisp/org-modern
+	url = https://github.com/minad/org-modern.git

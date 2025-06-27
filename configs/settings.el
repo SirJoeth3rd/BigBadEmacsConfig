@@ -55,11 +55,21 @@
 	     (concat user-emacs-directory "lisp/tao-theme"))
 (load-theme 'tao-yin)
 
+(setq initial-buffer-choice "~/welcome.org")
+
 ;;; following is to detect .bashrc in emacs, very usefull for
 ;;; inferior lisp processes. 
 (setq shell-command-switch "-ic")
 
 ;; SLIME!
-(load (expand-file-name "~/.quicklisp/slime-helper.el"))
-(setq inferior-lisp-program "/bin/sbcl")
+;;(load (expand-file-name "~/.quicklisp/slime-helper.el"))
+;;(setq inferior-lisp-program "/bin/sbcl")
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((haskell . t)
+   (python . t)))
+
+(provide 'settings)
+;;; settings.el ends here
 

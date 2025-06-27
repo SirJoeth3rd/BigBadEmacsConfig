@@ -75,20 +75,52 @@
   :defer t
   )
 
-;;git for a /g/entleman
+;;git for a /g/entlemen
 (use-package magit
   :load-path magit-path
   :ensure t)
 
+;;a /g/entleman's notebook
+(use-package org-mode
+  :ensure t)
+
+;;org mode for girls
+(use-package org-modern
+  :load-path org-modern-path
+  :config
+  (add-hook 'org-mode-hook #'org-modern-mode)
+  (add-hook 'org-agenda-finalize-hook #'org-modern-agenda))
+
 
 ;;following two modes are mainly for the workflow project
 (use-package go-mode
-  :load-path go-mode-path)
+  :load-path go-mode-path
+  :hook
+  (go-mode . outline-minor-mode)
+  (go-mode . (lambda ()
+	       (progn
+		 (setq-local outline-regexp "//#[#^L]*")
+		 (outline-hide-body)))))
+
+(use-package envrc
+  :config
+  (envrc-global-mode +1))
 
 (use-package elm-mode
-  :load-path elm-mode-path
   :config
-  (setq-local outline-regexp "--[-^L]*"))
+  :hook
+  (elm-mode . outline-minor-mode)
+  (scss-mode . outline-minor-mode)
+  (elm-mode . (lambda ()
+		(progn
+		  (setq-local outline-regexp "--#[#^L]*")
+		  (outline-hide-body))))
+  :config
+  ;; elm-mode is turning into general web-mode
+  (add-hook 'scss-mode-hook (lambda ()
+			      (setq-local outline-regexp "//#[#^L]*")))
+  )
+
 
 ;;tuareg is for ocaml development
 (use-package tuareg
@@ -109,6 +141,9 @@
 (use-package outline
   :config
   (setq outline-minor-mode-cycle t))
+
+(use-package vterm
+  :ensure t)
 
 (provide 'packages)
 ;;; packages.el ends here
