@@ -142,8 +142,5 @@
   :config
   (setq outline-minor-mode-cycle t))
 
-(use-package vterm
-  :ensure t)
-
 (provide 'packages)
 ;;; packages.el ends here

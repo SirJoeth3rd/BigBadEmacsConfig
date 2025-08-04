@@ -65,10 +65,13 @@
 ;;(load (expand-file-name "~/.quicklisp/slime-helper.el"))
 ;;(setq inferior-lisp-program "/bin/sbcl")
 
+(setq inferior-lisp-program "ros -Q run")
+
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((haskell . t)
-   (python . t)))
+   (python . t)
+   (dot . t)))
 
 (provide 'settings)
 ;;; settings.el ends here
