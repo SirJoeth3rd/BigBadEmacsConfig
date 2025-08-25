@@ -11,7 +11,17 @@
 	     (intern (concat package "-path"))
 	     (concat user-emacs-directory "lisp/" file)))
 
-
+;;god-mode
+(use-package god-mode
+  :load-path god-mode-path
+  :config
+  (god-mode)
+  (setq god-exempt-major-modes nil)
+  (setq god-exempt-predicates nil)
+  (defun my-god-mode-update-cursor-type ()
+    (setq cursor-type (if (or god-local-mode buffer-read-only) 'box 'bar)))
+  (add-hook 'post-command-hook #'my-god-mode-update-cursor-type)
+  (god-mode))
 
 ;; the search and replace you deserve
 (use-package visual-regexp
@@ -25,28 +35,11 @@
   (vertico-mode)
   (setq vertico-cycle t))
 
-;;yasnippet
-(use-package yasnippet
-  :load-path yasnippet-path
-  :config (yas-global-mode 1))
-
 ;;syntax checker
 (use-package flycheck
   :load-path flycheck-path
   :ensure t
   :config (global-flycheck-mode))
-
-;;god-mode
-(use-package god-mode
-  :load-path god-mode-path
-  :config
-  (god-mode)
-  (setq god-exempt-major-modes nil)
-  (setq god-exempt-predicates nil)
-  (defun my-god-mode-update-cursor-type ()
-    (setq cursor-type (if (or god-local-mode buffer-read-only) 'box 'bar)))
-  (add-hook 'post-command-hook #'my-god-mode-update-cursor-type)
-  (god-mode))
 
 (use-package company
   :load-path company-mode-path
@@ -107,12 +100,7 @@
 	      (yaml "https://github.com/ikatyang/tree-sitter-yaml"))))
     )
 
-
-;;a /g/entleman's notebook
-(use-package org-mode
-  :ensure t)
-
-;;org mode for girls
+;;org mode with feminine sensibilities
 (use-package org-modern
   :load-path org-modern-path
   :config
@@ -129,30 +117,6 @@
 	       (progn
 		 (setq-local outline-regexp "//#[#^L]*")
 		 (outline-hide-body)))))
-
-(use-package envrc
-  :config
-  (envrc-global-mode +1))
-
-(use-package elm-mode
-  :config
-  :hook
-  (elm-mode . outline-minor-mode)
-  (scss-mode . outline-minor-mode)
-  (elm-mode . (lambda ()
-		(progn
-		  (setq-local outline-regexp "--#[#^L]*")
-		  (outline-hide-body))))
-  :config
-  ;; elm-mode is turning into general web-mode
-  (add-hook 'scss-mode-hook (lambda ()
-			      (setq-local outline-regexp "//#[#^L]*")))
-  )
-
-
-;;tuareg is for ocaml development
-(use-package tuareg
-  :load-path tuareg-path)
 
 ;;dape is the emacs interface to the debug adapter protocol
 (use-package dape
