@@ -46,3 +46,6 @@
 [submodule "lisp/org-modern"]
 	path = lisp/org-modern
 	url = https://github.com/minad/org-modern.git
+[submodule "lisp/elisp-tree-sitter"]
+	path = lisp/elisp-tree-sitter
+	url = https://github.com/emacs-tree-sitter/elisp-tree-sitter
