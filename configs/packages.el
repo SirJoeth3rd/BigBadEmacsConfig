@@ -81,7 +81,8 @@
       :load-path elisp-tree-sitter-path
       :config
       (setq treesit-language-source-alist
-	    '((bash "https://github.com/tree-sitter/tree-sitter-bash")
+	    '((c "https://github.com/tree-sitter/tree-sitter-c.git")
+	      (bash "https://github.com/tree-sitter/tree-sitter-bash")
 	      (cmake "https://github.com/uyha/tree-sitter-cmake")
 	      (css "https://github.com/tree-sitter/tree-sitter-css")
 	      (elisp "https://github.com/Wilfred/tree-sitter-elisp")

@@ -40,6 +40,7 @@
  "C-c b" 'buffer-menu
  "C-d C-b" 'kill-current-buffer
  "C-c e" 'replace-elisp-with-result
+ "M-ESC" 'delete-frame
  )
 
 

@@ -85,7 +85,8 @@
      "3e374bb5eb46eb59dbd92578cae54b16de138bc2e8a31a2451bf6fdb0f3fd81b"
      "72ed8b6bffe0bfa8d097810649fd57d2b598deef47c992920aef8b5d9599eefe"
      default))
- '(package-selected-packages nil)
+ '(package-selected-packages
+   '(company flycheck magit templ-ts-mode visual-regexp web-mode))
  '(safe-local-variable-values '((git-commit-major-mode . git-commit-elisp-text-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
