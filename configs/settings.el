@@ -1,7 +1,10 @@
+;;-*- lexical-binding:t -*-
+
 ;;disable menu bar and tool bar
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
+(setq truncate-lines 't)
 
 ;;enable indentation in org mode automatically
 (add-hook 'org-mode-hook 'org-indent-mode)
@@ -61,17 +64,22 @@
 ;;; inferior lisp processes. 
 (setq shell-command-switch "-ic")
 
-;; SLIME!
-;;(load (expand-file-name "~/.quicklisp/slime-helper.el"))
-;;(setq inferior-lisp-program "/bin/sbcl")
-
-(setq inferior-lisp-program "ros -Q run")
-
+;; which langauges can you use in org mode
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((haskell . t)
    (python . t)
    (dot . t)))
+
+;; setting org-minor-mode regexp for some langauges
+(defun outline-mode-hook (rgx)
+  "Create an outline mode hook function with regexp RGX."
+  (lambda ()
+    (progn
+      (outline-minor-mode)
+      (setq-local outline-regexp rgx))))
+
+(add-hook 'c-mode-hook (outline-mode-hook " *//#[#^L]*"))
 
 (provide 'settings)
 ;;; settings.el ends here

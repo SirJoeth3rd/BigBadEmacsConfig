@@ -108,7 +108,6 @@
   (add-hook 'org-mode-hook #'org-modern-mode)
   (add-hook 'org-agenda-finalize-hook #'org-modern-agenda))
 
-
 ;;following two modes are mainly for the workflow project
 (use-package go-mode
   :load-path go-mode-path
@@ -117,7 +116,9 @@
   (go-mode . (lambda ()
 	       (progn
 		 (setq-local outline-regexp "//#[#^L]*")
-		 (outline-hide-body)))))
+		 (outline-hide-body))))
+  )
+
 
 ;;dape is the emacs interface to the debug adapter protocol
 (use-package dape
