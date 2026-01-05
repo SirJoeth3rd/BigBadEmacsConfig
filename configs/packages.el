@@ -28,12 +28,18 @@
   :load-path visual-regexp-path
   :ensure t)
 
-;; Enable vertico
 (use-package vertico
   :load-path vertico-path
   :config
   (vertico-mode)
   (setq vertico-cycle t))
+
+(load (expand-file-name "extensions/vertico-sort.el" vertico-path))
+(setq vertico-sort-function 'vertico-sort-history-length-alpha)
+
+(use-package savehist
+  :init
+  (savehist-mode))
 
 ;;syntax checker
 (use-package flycheck
@@ -135,6 +141,9 @@
 (use-package outline
   :config
   (setq outline-minor-mode-cycle t))
+
+;; whitebox
+(load-file (concat user-emacs-directory "lisp/whitebox.el"))
 
 (provide 'packages)
 ;;; packages.el ends here

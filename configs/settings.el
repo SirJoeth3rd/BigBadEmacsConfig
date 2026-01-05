@@ -38,7 +38,7 @@
 (setq warning-minimum-level :warning)
 
 ;; keep a history of commands which vertico can use
-(savehist-mode)
+(savehist-mode 1)
 
 ;; highlight matching parentheses
 (setq show-paren-delay 0)

@@ -86,7 +86,8 @@
      "72ed8b6bffe0bfa8d097810649fd57d2b598deef47c992920aef8b5d9599eefe"
      default))
  '(package-selected-packages
-   '(company flycheck magit templ-ts-mode visual-regexp web-mode))
+   '(company flycheck magit templ-ts-mode typescript-mode visual-regexp
+	     web-mode))
  '(safe-local-variable-values '((git-commit-major-mode . git-commit-elisp-text-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
