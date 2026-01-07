@@ -117,6 +117,9 @@
 ;;following two modes are mainly for the workflow project
 (use-package go-mode
   :load-path go-mode-path
+  :init
+  (autoload 'go-mode "go-mode" nil t)
+  (add-to-list 'auto-mode-alist '("\\.go\\'" . go-mode))
   :hook
   (go-mode . outline-minor-mode)
   (go-mode . (lambda ()
