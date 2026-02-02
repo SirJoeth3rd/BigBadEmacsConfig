@@ -31,3 +31,6 @@
 [submodule "lisp/elisp-tree-sitter"]
 	path = lisp/elisp-tree-sitter
 	url = https://github.com/emacs-tree-sitter/elisp-tree-sitter
+[submodule "lisp/combobulate"]
+	path = lisp/combobulate
+	url = https://github.com/mickeynp/combobulate.git
