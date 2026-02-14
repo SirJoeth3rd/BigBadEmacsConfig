@@ -31,3 +31,6 @@
 [submodule "lisp/elisp-tree-sitter"]
 	path = lisp/elisp-tree-sitter
 	url = https://github.com/emacs-tree-sitter/elisp-tree-sitter
+[submodule "lisp/tempel"]
+	path = lisp/tempel
+	url = https://github.com/minad/tempel.git

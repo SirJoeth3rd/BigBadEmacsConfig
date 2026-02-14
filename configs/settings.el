@@ -81,6 +81,8 @@
 
 (add-hook 'c-mode-hook (outline-mode-hook " *//#[#^L]*"))
 
+(setq-default tab-width 2)
+
 (provide 'settings)
 ;;; settings.el ends here
 

@@ -117,6 +117,8 @@
 ;;following two modes are mainly for the workflow project
 (use-package go-mode
   :load-path go-mode-path
+	:config
+	(setq go-ts-mode-indent-offset 2)
   :hook
   (go-mode . outline-minor-mode)
   (go-mode . (lambda ()
