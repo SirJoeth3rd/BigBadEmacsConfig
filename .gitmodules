@@ -34,3 +34,6 @@
 [submodule "lisp/tempel"]
 	path = lisp/tempel
 	url = https://github.com/minad/tempel.git
+[submodule "lisp/combobulate"]
+	path = lisp/combobulate
+	url = https://github.com/mickeynp/combobulate.git

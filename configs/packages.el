@@ -58,8 +58,6 @@
   ;;search only in same-mode buffers
   (company-dabbrev-other-buffers t)
   (company-dabbrev-code-other-buffers t)
-  ;;M-<num> to select option <num>
-  (company-show-numbers t)
   ;;Start completion after 2 letters
   (company-minimum-prefix-length 3)
   ;;no company mode in shell and eshell
@@ -119,6 +117,8 @@
   :load-path go-mode-path
 	:config
 	(setq go-ts-mode-indent-offset 2)
+	(autoload 'go-mode "go-mode" nil t)
+  (add-to-list 'auto-mode-alist '("\\.go\\'" . go-mode))
   :hook
   (go-mode . outline-minor-mode)
   (go-mode . (lambda ()
@@ -126,17 +126,6 @@
 		 (setq-local outline-regexp "//#[#^L]*")
 		 (outline-hide-body))))
   )
-
-
-;;dape is the emacs interface to the debug adapter protocol
-(use-package dape
-  :load-path dape-path
-  :config
-  ;; pulse source line
-  (add-hook 'dape-display-source-hook 'pulse-momentary-highlight-one-line)
-  
-  ;; remove some annoying info from startup
-  (remove-hook 'dape-start-hook 'dape-repl))
 
 ;; emacs built in folding
 ;; TODO: check out integration with imenu
@@ -146,6 +135,12 @@
 
 ;; whitebox
 (load-file (concat user-emacs-directory "lisp/whitebox.el"))
+
+;; combobulate
+(use-package combobulate
+  :load-path combobulate-path
+  :hook ((prog-mode . combobulate-mode))
+  )
 
 (provide 'packages)
 ;;; packages.el ends here
