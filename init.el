@@ -12,13 +12,6 @@
 (eval-when-compile
   (add-to-list 'load-path (concat user-emacs-directory "lisp/use-package"))
   (require 'use-package))
-
-;;quick use-package doc
-;; :init -> exprs pre package load
-;; :config -> exprs post package load
-;; :mode -> regex of files to load a mode for
-;; :hook -> (a-mode . b-mode) expands to add-hook
-;; :custom-face -> expands to set face attribute
  
 ;; A few more useful configurations...
 (use-package emacs

@@ -38,7 +38,7 @@
 (setq vertico-sort-function 'vertico-sort-history-length-alpha)
 
 (use-package savehist
-  :init
+  :config
   (savehist-mode))
 
 ;;syntax checker
@@ -136,11 +136,11 @@
 ;; whitebox
 (load-file (concat user-emacs-directory "lisp/whitebox.el"))
 
-;; combobulate
-(use-package combobulate
-  :load-path combobulate-path
-  :hook ((prog-mode . combobulate-mode))
-  )
+(use-package tempel
+	:load-path tempel-path)
+
+(use-package multiple-cursors
+	:load-path multiple-cursors-path)
 
 (provide 'packages)
 ;;; packages.el ends here
