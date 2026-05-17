@@ -14,6 +14,8 @@
 (defvar universal-keymap-mode-map (make-sparse-keymap)
   "Universal overide keymap.")
 
+(setq god-literal-key "SPC")
+
 ;;following keymaps must always be set
 (set-keys-on-map
  universal-keymap-mode-map
@@ -68,13 +70,23 @@
  "C-s C-l" 'select-line ;; our select line function
  "C-d C-d" 'kill-line-custom)
 
-;; only remap i in god-mode locally,
-;; the reason is C-i and tab are the same thing.
-;; So remappign C-i means remapping tab as well. (I should look at how Xah handled this)
-;; also my previous-line cmd being at the bottom of this file
-;; means I'll very quickly realise if there where any errors in
-;; configs until this point.
+;; The following is to solve a conundrum, TAB is sent as C-i to emacs.
+;; I want C-i to mean previous-line and TAB to mean TAB.
 
+(defun reset-ctrl-i ()
+	"Splits C-i from TAB as two different keys."
+	(interactive)
+	(define-key input-decode-map [?\C-i] [control-i])
+	(global-set-key (kbd "<control-i>") 'previous-line))
+
+(add-hook 'after-make-frame-functions (lambda (frame) (reset-ctrl-i)))
+
+(if (daemonp)
+	nil            ;; If this is daemon server frames are handled by hook above.
+	(reset-ctrl-i));; Else, configure the initial frame
+
+;; in terminal mode TAB will always be C-i
+;; so best we can do is map i to up in god-mode only
 (keymap-set god-local-mode-map "i" 'previous-line)
 
 ;;unloading key in verilog mode

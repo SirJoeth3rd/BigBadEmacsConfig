@@ -34,3 +34,13 @@
 [submodule "lisp/combobulate"]
 	path = lisp/combobulate
 	url = https://github.com/mickeynp/combobulate.git
+[submodule "lisp/counsel-etags"]
+	path = lisp/counsel-etags
+	url = https://github.com/redguardtoo/counsel-etags.git
+[submodule "lisp/corfu"]
+	path = lisp/corfu
+	url = https://github.com/minad/corfu.git
+[submodule "notes"]
+	path = notes
+	url = git@github.com:SirJoeth3rd/notes.git
+	active = false # this is my private notes repo

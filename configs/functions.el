@@ -192,5 +192,15 @@ Version 2019-12-26"
     (delete-region start (point))
     (insert (format "%S" value))))
 
+(defun magit-auto-commit-push ()
+  "Stage everything, commit with current timestamp and push."
+  (interactive)
+  (if (not (magit-toplevel))
+      (message "Not in a git repository")
+    (let ((commit-message (format-time-string "%Y-%m-%d %H:%M:%S")))
+      (magit-stage-modified)
+      (magit-commit-create `("-m" ,commit-message))
+      (magit-push-current-to-pushremote))))
+
 (provide 'functions)
 ;;; functions.el ends here

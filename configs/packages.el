@@ -11,6 +11,8 @@
 	     (intern (concat package "-path"))
 	     (concat user-emacs-directory "lisp/" file)))
 
+(add-to-list 'load-path (concat user-emacs-directory "lisp"))
+
 ;;god-mode
 (use-package god-mode
   :load-path god-mode-path
@@ -25,7 +27,6 @@
 
 ;; the search and replace you deserve
 (use-package visual-regexp
-  :load-path visual-regexp-path
   :ensure t)
 
 (use-package vertico
@@ -41,6 +42,20 @@
   :init
   (savehist-mode))
 
+;;dired
+(defun dired-find-file-other-window-cond ()
+	(interactive)
+	(if (and (> (length (window-list)) 1) (not (file-directory-p (dired-get-file-for-visit))))
+			(dired-find-file-other-window)
+		(dired-find-file)))
+
+(use-package dired
+	:config
+	(setq dired-dwim-target t)
+	:bind (
+				 :map dired-mode-map
+							("<return>" . dired-find-file-other-window-cond)))
+
 ;;syntax checker
 (use-package flycheck
   :load-path flycheck-path
@@ -48,36 +63,49 @@
   :config (global-flycheck-mode))
 
 (use-package company
-  :load-path company-mode-path
-  :ensure t
-  :defer t
-  :config
-  (add-hook 'after-init-hook 'global-company-mode)
-  (setq company-idle-delay 0)
-  :custom
-  ;;search only in same-mode buffers
-  (company-dabbrev-other-buffers t)
-  (company-dabbrev-code-other-buffers t)
-  ;;Start completion after 2 letters
-  (company-minimum-prefix-length 3)
-  ;;no company mode in shell and eshell
-  (company-global-modes '(not eshell-mode shell-mode))
-  ;;use company with text and programming modes
-  :hook ((text-mode . company-mode)
-	 (prog-mode . company-mode))
-  )
+	:load-path company-mode-path
+	:demand t
+	:config
+	(add-hook 'after-init-hook 'global-company-mode)
+	(setq company-idle-delay 0)
+	:custom
+	search only in same-mode buffers
+	(company-dabbrev-other-buffers t)
+	(company-dabbrev-code-other-buffers t)
+	Start completion after 2 letters
+	(company-minimum-prefix-length 3)
+	no company mode in shell and eshell
+	(company-global-modes '(not eshell-mode shell-mode))
+	use company with text and programming modes
+	:hook ((text-mode . company-mode)
+				 (prog-mode . company-mode))
+	)
 
 ;;eglot bro it's eglot
 ;;eglot is built in
 (use-package eglot
   :ensure t
-  :defer t
   )
 
 ;;git for a /g/entlemen
 (use-package magit
   :load-path magit-path
   :ensure t)
+
+;;
+(use-package counsel-etags
+	:vc t
+	:load-path counsel-etags-path
+  :ensure t
+  :bind (("C-]" . counsel-etags-find-tag-at-point))
+  :init
+  (add-hook 'prog-mode-hook
+        (lambda ()
+          (add-hook 'after-save-hook
+            'counsel-etags-virtual-update-tags 'append 'local)))
+  :config
+  (setq counsel-etags-update-interval 60)
+  (push "build" counsel-etags-ignore-directories))
 
 ;; Treesitter setup
 (when (treesit-available-p) ;; treesitter might not be available
@@ -118,13 +146,14 @@
   :init
   (autoload 'go-mode "go-mode" nil t)
   (add-to-list 'auto-mode-alist '("\\.go\\'" . go-mode))
+	:config
+	(setq-default go-ts-mode-indent-offset 2)
   :hook
   (go-mode . outline-minor-mode)
   (go-mode . (lambda ()
-	       (progn
-		 (setq-local outline-regexp "//#[#^L]*")
-		 (outline-hide-body))))
-  )
+							 (progn
+								 (setq-local outline-regexp "//#[#^L]*")
+								 (outline-hide-body)))))
 
 ;; emacs built in folding
 ;; TODO: check out integration with imenu
@@ -138,8 +167,7 @@
 ;; combobulate
 (use-package combobulate
   :load-path combobulate-path
-  :hook ((prog-mode . combobulate-mode))
-  )
+  :hook ((prog-mode . combobulate-mode)))
 
 (provide 'packages)
 ;;; packages.el ends here

@@ -1,5 +1,8 @@
 ;;-*- lexical-binding:t -*-
 
+;; I like it nice and thin.
+(setq-default tab-width 2)
+
 ;;disable menu bar and tool bar
 (tool-bar-mode -1)
 (menu-bar-mode -1)
@@ -58,8 +61,6 @@
 	     (concat user-emacs-directory "lisp/tao-theme"))
 (load-theme 'tao-yin)
 
-(setq initial-buffer-choice "~/welcome.org")
-
 ;;; following is to detect .bashrc in emacs, very usefull for
 ;;; inferior lisp processes. 
 (setq shell-command-switch "-ic")
@@ -80,6 +81,12 @@
       (setq-local outline-regexp rgx))))
 
 (add-hook 'c-mode-hook (outline-mode-hook " *//#[#^L]*"))
+(add-hook 'python-mode-hook (outline-mode-hook " *#-[-^L]*"))
+
+(setq xref-auto-jump-to-first-xref t)
+(setq xref-auto-jump-to-first-definition t)
+
+(setq initial-buffer-choice (file-name-concat user-emacs-directory "notes" "adayinthelife.org"))
 
 (provide 'settings)
 ;;; settings.el ends here
