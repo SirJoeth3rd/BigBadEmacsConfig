@@ -92,21 +92,6 @@
   :load-path magit-path
   :ensure t)
 
-;;
-(use-package counsel-etags
-	:vc t
-	:load-path counsel-etags-path
-  :ensure t
-  :bind (("C-]" . counsel-etags-find-tag-at-point))
-  :init
-  (add-hook 'prog-mode-hook
-        (lambda ()
-          (add-hook 'after-save-hook
-            'counsel-etags-virtual-update-tags 'append 'local)))
-  :config
-  (setq counsel-etags-update-interval 60)
-  (push "build" counsel-etags-ignore-directories))
-
 ;; Treesitter setup
 (when (treesit-available-p) ;; treesitter might not be available
     (use-package treesit
@@ -140,22 +125,6 @@
   (add-hook 'org-mode-hook #'org-modern-mode)
   (add-hook 'org-agenda-finalize-hook #'org-modern-agenda))
 
-;;following two modes are mainly for the workflow project
-(use-package go-mode
-  :load-path go-mode-path
-	:config
-	(setq go-ts-mode-indent-offset 2)
-	(autoload 'go-mode "go-mode" nil t)
-  (add-to-list 'auto-mode-alist '("\\.go\\'" . go-mode))
-	:config
-	(setq-default go-ts-mode-indent-offset 2)
-  :hook
-  (go-mode . outline-minor-mode)
-  (go-mode . (lambda ()
-							 (progn
-								 (setq-local outline-regexp "//#[#^L]*")
-								 (outline-hide-body)))))
-
 ;; emacs built in folding
 ;; TODO: check out integration with imenu
 (use-package outline
@@ -169,6 +138,8 @@
 (use-package combobulate
   :load-path combobulate-path
   :hook ((prog-mode . combobulate-mode)))
+
+;; tempel -- reuse snippets
 (use-package tempel
 	:load-path tempel-path)
 
