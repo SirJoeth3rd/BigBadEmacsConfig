@@ -88,6 +88,8 @@
 
 (setq initial-buffer-choice (file-name-concat user-emacs-directory "notes" "adayinthelife.org"))
 
+(setq-default tab-width 2)
+
 (provide 'settings)
 ;;; settings.el ends here
 

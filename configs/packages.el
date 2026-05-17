@@ -39,7 +39,7 @@
 (setq vertico-sort-function 'vertico-sort-history-length-alpha)
 
 (use-package savehist
-  :init
+  :config
   (savehist-mode))
 
 ;;dired
@@ -143,8 +143,9 @@
 ;;following two modes are mainly for the workflow project
 (use-package go-mode
   :load-path go-mode-path
-  :init
-  (autoload 'go-mode "go-mode" nil t)
+	:config
+	(setq go-ts-mode-indent-offset 2)
+	(autoload 'go-mode "go-mode" nil t)
   (add-to-list 'auto-mode-alist '("\\.go\\'" . go-mode))
 	:config
 	(setq-default go-ts-mode-indent-offset 2)
@@ -168,6 +169,11 @@
 (use-package combobulate
   :load-path combobulate-path
   :hook ((prog-mode . combobulate-mode)))
+(use-package tempel
+	:load-path tempel-path)
+
+(use-package multiple-cursors
+	:load-path multiple-cursors-path)
 
 (provide 'packages)
 ;;; packages.el ends here

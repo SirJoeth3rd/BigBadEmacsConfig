@@ -40,7 +40,9 @@
 [submodule "lisp/corfu"]
 	path = lisp/corfu
 	url = https://github.com/minad/corfu.git
-[submodule "notes"]
-	path = notes
-	url = git@github.com:SirJoeth3rd/notes.git
-	active = false # this is my private notes repo
+[submodule "lisp/tempel"]
+	path = lisp/tempel
+	url = https://github.com/minad/tempel.git
+[submodule "lisp/multiple-cursors"]
+	path = lisp/multiple-cursors
+	url = https://github.com/magnars/multiple-cursors.el.git
